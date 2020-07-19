@@ -1,0 +1,36 @@
+<div class="row mb-5">
+  <div class="col-md-6 m-auto">
+    <div class="card card-body">
+      <img src="/img/logo.png" class="mx-auto d-block m-4 logo" alt="Logomarca Anotaqi">
+      <h1 class="text-center">Criar conta</h1>
+      <hr>
+      {{> errors }}
+      <form action="/users/signup" method="POST">
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="name" id="nome" name="nome" class="form-control" placeholder="Digite seu nome"
+            value="{{nome}}" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="Digite seu e-mail"
+            value="{{email}}" />
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="senha" name="senha" class="form-control" placeholder="Crie uma senha"
+            value="{{senha}}" />
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirmar senha</label>
+          <input type="password" id="senha2" name="senha2" class="form-control" placeholder="Confirme sua senha"
+            value="{{senha2}}" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          Registrar
+        </button>
+      </form>
+      <p class="lead mt-4">Já possuí uma conta? <a href="/users/signin">Login</a></p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="row">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center mb-3">
+                Cadastrar Nova Nota
+            </h1>
+            {{> errors }}
+            <hr>
+            <form action="/notes/register" method="POST">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Título da nota"
+                        autofocus />
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <textarea name="descricao" id="descricao" class="form-control" cols="30" rows="10"
+                        style="resize: none;" placeholder="Descrição da nota"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">
+                    Cadastrar nota
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

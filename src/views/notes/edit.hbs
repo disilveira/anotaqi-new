@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center mb-3">
+                Editar Nota
+            </h1>
+            <small class="text-center">id: {{note._id}}</small>
+            {{#each errors }}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{text}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{/each}}
+            <hr>
+            <form action="/notes/edit/{{note._id}}?_method=PUT" method="POST">
+            <input type="hidden" name="_method" value="PUT">
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Título da nota"
+                        value="{{note.titulo}}"/>
+                </div>
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+                    <textarea name="descricao" id="descricao" class="form-control" cols="30" rows="10"
+                        style="resize: none;" placeholder="Descrição da nota">{{note.descricao}}</textarea>
+                </div>
+                <a href="/notes" class="btn btn-secondary btn-block">Voltar</a>
+                <button type="submit" class="btn btn-primary btn-block">
+                    Atualizar nota
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
