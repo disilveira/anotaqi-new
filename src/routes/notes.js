@@ -5,7 +5,9 @@ const Task = require('../models/Task');
 const { isAuthenticated } = require('../helpers/auth');
 
 router.get('/notes/register', isAuthenticated, (req, res) => {
-    res.render('notes/register');
+    res.render('notes/register', {
+        title: 'Criar uma nota'
+    });
 });
 
 router.post('/notes/register', isAuthenticated, async (req, res) => {
@@ -41,7 +43,7 @@ router.post('/notes/register', isAuthenticated, async (req, res) => {
 
 router.get('/notes', isAuthenticated, async (req, res) => {
     const notes = await Note.find({ user: req.user.id }).sort({ date: 'desc' }).lean();
-    res.render('notes/list', { notes });
+    res.render('notes/list', { notes, title: 'Minhas Notas' });
 });
 
 router.get('/notes/json', isAuthenticated, async (req, res) => {
@@ -52,7 +54,8 @@ router.get('/notes/json', isAuthenticated, async (req, res) => {
 router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
     const note = await Note.findById(req.params.id).lean();
     res.render('notes/edit', {
-        note
+        note,
+        title: 'Editar Nota'
     })
 });
 

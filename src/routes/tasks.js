@@ -9,7 +9,8 @@ router.get('/tasks/:id', isAuthenticated, async (req, res) => {
     const tasks = await Task.find({note: req.params.id, user: req.user.id}).sort({date: 'desc'}).lean();
     res.render('tasks/index', {
         note,
-        tasks
+        tasks,
+        title: 'Tarefas'
     });
 });
 

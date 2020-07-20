@@ -5,7 +5,9 @@ const User = require('../models/User');
 const passport = require('passport');
 
 router.get('/users/signin', (req, res) => {
-    res.render('users/signin');
+    res.render('users/signin', {
+        title: 'Login'
+    });
 });
 
 router.post('/users/signin', passport.authenticate('local', {
@@ -16,7 +18,9 @@ router.post('/users/signin', passport.authenticate('local', {
 }));
 
 router.get('/users/signup', (req, res) => {
-    res.render('users/signup');
+    res.render('users/signup', {
+        title: 'Criar conta'
+    });
 });
 
 router.post('/users/signup', async (req, res) => {
