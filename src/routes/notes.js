@@ -46,7 +46,6 @@ router.get('/notes', isAuthenticated, async (req, res) => {
 
 router.get('/notes/json', isAuthenticated, async (req, res) => {
     const task = await Task.find();
-
     res.json(task);
 });
 

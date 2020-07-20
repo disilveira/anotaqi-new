@@ -13,6 +13,7 @@
                     </div>
                 </div>
             </form>
+            <p class="text-center"><b>Obs.:</b> Para editar uma nota, basta clicar no texto e editá-lo. Ao sair do campo de edição, a atualização será automática.</p>
             <table class="table table-hover table-sm">
                 <thead>
                     <tr class="table-dark">
@@ -23,8 +24,17 @@
                 <tbody>
                     {{#each tasks}}
                     <tr {{#if status}} class="table-success" {{/if}}>
-                        <td scope="row" class="align-middle" {{#if status}} style="text-decoration:line-through"
-                            {{/if}}>{{tarefa}}</td>
+                        {{#if status}}
+                        <td scope="row" class="align-middle" style="text-decoration:line-through">{{tarefa}}</td>
+                        {{else}}
+                        <td class="align-middle">
+                            <form id="tarefa_edit" action="/task/edit/{{_id}}/{{note}}?_method=PUT" method="POST">
+                                <input type="hidden" name="_method" value="PUT">
+                                <input type="text" class="tarefa form-control-plaintext" name="tarefa_new" value="{{tarefa}}">
+                            </form>
+                        </td>
+                        {{/if}}
+
                         <td class="align-middle">
                             <div class="dropdown show">
                                 <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -38,13 +48,6 @@
                                             <input type="hidden" name="_method" value="PUT">
                                             <button type="submit"
                                                 class="btn btn-success btn-block btn-sm">Concluir</button>
-                                        </form>
-                                    </a>
-                                    <a class="dropdown-item">
-                                        <form action="/task/edit/{{_id}}/{{note}}?_method=PUT" method="POST">
-                                            <input type="hidden" name="_method" value="PUT">
-                                            <button type="submit"
-                                                class="btn btn-primary btn-block btn-sm">Editar</button>
                                         </form>
                                     </a>
                                     <hr>

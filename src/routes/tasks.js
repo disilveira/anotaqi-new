@@ -21,6 +21,15 @@ router.put('/task/finish/:id/:note', isAuthenticated, async (req, res) => {
     res.redirect('/tasks/' + note);
 });
 
+router.put('/task/edit/:id/:note', isAuthenticated, async (req, res) => {
+    const { tarefa_new } = req.body;
+    const task = req.params.id;
+    const note = req.params.note;
+    await Task.findByIdAndUpdate(task, { tarefa: tarefa_new });
+    req.flash('success_msg', 'Tarefa atualizada com sucesso!');
+    res.redirect('/tasks/' + note);
+});
+
 router.delete('/task/delete/:id/:note', isAuthenticated, async (req, res) => {
     const task = req.params.id;
     const note = req.params.note;
