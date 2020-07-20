@@ -22,7 +22,7 @@ app.engine('.hbs', hbs({
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
         allowProtoMethodsByDefault: true
-      }
+    }
 }));
 app.set('view engine', '.hbs');
 
