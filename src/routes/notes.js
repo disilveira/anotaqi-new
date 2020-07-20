@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Note = require('../models/Notes');
+const Task = require('../models/Task');
 const { isAuthenticated } = require('../helpers/auth');
 
 router.get('/notes/register', isAuthenticated, (req, res) => {
@@ -11,15 +12,15 @@ router.post('/notes/register', isAuthenticated, async (req, res) => {
     const { titulo, descricao } = req.body;
     const errors = [];
 
-    if(!titulo){
+    if (!titulo) {
         errors.push({ text: 'É necessário preencher um título para a nota' });
     }
 
-    if(!descricao){
+    if (!descricao) {
         errors.push({ text: 'É necessário preencher uma descrição para a nota' });
     }
 
-    if(errors.length > 0){
+    if (errors.length > 0) {
         res.render('notes/register', {
             errors,
             titulo,
@@ -39,8 +40,14 @@ router.post('/notes/register', isAuthenticated, async (req, res) => {
 });
 
 router.get('/notes', isAuthenticated, async (req, res) => {
-    const notes = await Note.find({ user: req.user.id }).sort({date: 'desc'}).lean();
+    const notes = await Note.find({ user: req.user.id }).sort({ date: 'desc' }).lean();
     res.render('notes/list', { notes });
+});
+
+router.get('/notes/json', isAuthenticated, async (req, res) => {
+    const task = await Task.find();
+
+    res.json(task);
 });
 
 router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
@@ -58,7 +65,8 @@ router.put('/notes/edit/:id', isAuthenticated, async (req, res) => {
 });
 
 router.delete('/notes/delete/:id', isAuthenticated, async (req, res) => {
-    await Note.findByIdAndRemove(req.params.id);
+    await Note.findByIdAndDelete(req.params.id);
+    await Task.deleteMany({ note: req.params.id });
     req.flash('success_msg', 'Nota excluída com sucesso!');
     res.redirect('/notes');
 });

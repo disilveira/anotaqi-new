@@ -3,7 +3,7 @@
 </div>
 <div class="row">
     {{#each notes}}
-    <div class="col-md-3 mb-2">
+    <div class="col-md-4 mb-2">
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title d-flex justify-content-between align-items-center">
@@ -30,12 +30,12 @@
                 </h3>
                 <hr>
                 <p class="lead">{{descricao}}</p>
-                <div class="d-flex justify-content-between align-items-center">
-                    <div><span class="badge badge-success">4</span> Concluída(s)</div>
-                    <div><span class="badge badge-warning">3</span> Pendente(s)</div>
-                </div>
+                <!--<div>
+                    <div class="m-auto"><span class="badge badge-success">4</span> Concluída(s)</div>
+                    <div class="m-auto"><span class="badge badge-warning">3</span> Pendente(s)</div>
+                </div>-->
                 <hr>
-                <a href="/tasks/register/{{_id}}" class="btn btn-success btn-block">Acessar Tarefa(s)</a>
+                <a href="/tasks/{{_id}}" class="btn btn-success btn-block">Acessar Tarefa(s)</a>
             </div>
         </div>
     </div>

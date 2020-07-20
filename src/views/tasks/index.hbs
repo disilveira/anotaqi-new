@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-12 mb-2 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center">{{note.titulo}}</h1>
+            <p class="lead text-center">{{note.descricao}}</p>
+            <hr>
+            <form action="/tasks/register/{{note._id}}" method="POST">
+                <div class="input-group mb-3">
+                    <input type="text" id="tarefa" name="tarefa" class="form-control" placeholder="Digite uma tarefa"
+                        aria-label="Digite uma tarefa" aria-describedby="basic-addon2" autofocus>
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-primary" type="button"><i class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+            </form>
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr class="table-dark">
+                        <th scope="col">Tarefa</th>
+                        <th scope="col" width="1%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each tasks}}
+                    <tr {{#if status}} class="table-success" {{/if}}>
+                        <td scope="row" class="align-middle" {{#if status}} style="text-decoration:line-through"
+                            {{/if}}>{{tarefa}}</td>
+                        <td class="align-middle">
+                            <div class="dropdown show">
+                                <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Ações
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                                    {{#unless status}}
+                                    <a class="dropdown-item">
+                                        <form action="/task/finish/{{_id}}/{{note}}?_method=PUT" method="POST">
+                                            <input type="hidden" name="_method" value="PUT">
+                                            <button type="submit"
+                                                class="btn btn-success btn-block btn-sm">Concluir</button>
+                                        </form>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <form action="/task/edit/{{_id}}/{{note}}?_method=PUT" method="POST">
+                                            <input type="hidden" name="_method" value="PUT">
+                                            <button type="submit"
+                                                class="btn btn-primary btn-block btn-sm">Editar</button>
+                                        </form>
+                                    </a>
+                                    <hr>
+                                    {{/unless}}
+                                    <a class="dropdown-item">
+                                        <form action="/task/delete/{{_id}}/{{note}}?_method=DELETE" method="POST">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit"
+                                                class="btn btn-danger btn-block btn-sm">Excluir</button>
+                                        </form>
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td colspan="2" class="text-center">Nenhuma tarefa cadastrada.</td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
