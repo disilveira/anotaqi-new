@@ -43,12 +43,18 @@ router.post('/notes/register', isAuthenticated, async (req, res) => {
 
 router.get('/notes', isAuthenticated, async (req, res) => {
     const notes = await Note.find({ user: req.user.id }).sort({ date: 'desc' }).lean();
-    res.render('notes/list', { notes, title: 'Minhas Notas' });
+    const tasks = await Task.aggregate([
+        { "$group": { _id: { note: "$note", status: "$status" }, count: { $sum: 1 } } }
+    ]);
+    res.render('notes/list', { notes, tasks, title: 'Minhas Notas' });
 });
 
 router.get('/notes/json', isAuthenticated, async (req, res) => {
-    const task = await Task.find();
-    res.json(task);
+    const notes = await Note.find({ user: req.user.id }).sort({ date: 'desc' }).lean();
+    const tasks = await Task.aggregate([
+        { "$group": { _id: { note: "$note", status: "$status" }, count: { $sum: 1 } } }
+    ]);
+    res.json({notes, tasks});
 });
 
 router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
