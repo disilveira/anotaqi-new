@@ -1,6 +1,24 @@
 # AnotaQi App
 
+![](https://anotaqi.herokuapp.com/img/logo.png)
+
 Sistema: [https://anotaqi.herokuapp.com](https://anotaqi.herokuapp.com)
+
+# Node
+
+```
+node start
+
+```
+
+# Docker
+
+```
+
+docker build -t nodejs-anotaqi .
+docker run -p 80:3000 -d nodejs-anotaqi
+
+```
 
 Este aplicativo foi desenvolvido pelos alunos do curso de Desenvolvimento Web Full Stack da universidade PUC Minas. Desenvolvido em node, o aplicativo tem os seguintes recursos:
 
